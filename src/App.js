@@ -19,6 +19,7 @@ import TVShow from './Components/TVShow/TVShow';
 import { Details } from './Components/Details/Details';
 import jwtDecode from 'jwt-decode';
 import React,{ useEffect , useState} from 'react'
+import MovieContextProvider from './Components/Store';
 
 
 
@@ -28,7 +29,7 @@ export function App() {
   
   function TestingRoute(props){
     if(localStorage.getItem('token')==null){
-      return <Navigate to="/signup"/>
+      return <Navigate to="/login"/>
     }
     else{
       return props.children;
@@ -46,7 +47,7 @@ export function App() {
     localStorage.removeItem('token');
     setCurrentUser(null);
     navigate('/login');
-    console.log(tkn);
+    // console.log(tkn);
   }
   useEffect(()=>{
   if(localStorage.getItem('token')!=null){
@@ -56,10 +57,13 @@ export function App() {
  
    },[]);
   return <>
+  <MovieContextProvider>
+
+  
     <Navbar crrUser={currentUser} clrUser={clearUser}/>
     <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='home' element={<Home/>}/>
+      <Route path='/' element={<TestingRoute><Home/></TestingRoute>}/>
+      <Route path='home' element={<TestingRoute><Home/></TestingRoute>}/>
       <Route path='movie' element={<TestingRoute><Movies/></TestingRoute>}/>
       <Route path='tvshow' element={<TestingRoute><TVShow/></TestingRoute>}/>
       <Route path='details' element={<TestingRoute><Details/></TestingRoute>}>
@@ -75,7 +79,7 @@ export function App() {
     </Routes>
     
    
-    
+  </MovieContextProvider>
   </>
 }
 

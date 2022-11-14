@@ -75,7 +75,7 @@ export  function Register() {
   
   <div className="w-75 m-auto">
     {
-        messag.length==0?'':<div className='alert alert-danger'>{messag}</div>
+        messag.length===0?'':<div className='alert alert-danger'>{messag}</div>
     }
     {/* {
     err.map((element,idx)=><div key={idx} className='alert alert-danger'>
@@ -86,19 +86,19 @@ export  function Register() {
 
         <label htmlFor="first_name">first_name</label>
         <input onChange={getUser} type="text" className='form-control my-3' placeholder='first_name' id='first_name' />
-        { getError("first_name").length==0?'':<div className='alert alert-danger '>{getError("first_name")}</div>}
+        { getError("first_name").length===0?'':<div className='alert alert-danger '>{getError("first_name")}</div>}
         <label htmlFor="last_name">last_name</label>
         <input onChange={getUser} type="text" className='form-control my-3'placeholder='last_name' id='last_name' />
-        { getError("last_name").length==0?'':<div className='alert alert-danger '>{getError("last_name")}</div>}
+        { getError("last_name").length===0?'':<div className='alert alert-danger '>{getError("last_name")}</div>}
         <label htmlFor="age">age</label>
         <input onChange={getUser} type="number" className='form-control my-3' placeholder='age' id='age' />
-        { getError("age").length==0?'':<div className='alert alert-danger '>{getError("age")}</div>}
+        { getError("age").length===0?'':<div className='alert alert-danger '>{getError("age")}</div>}
         <label htmlFor="email">email</label>
         <input onChange={getUser} type="email" className='form-control my-3' placeholder='email' id='email' />
-        { getError("email").length==0?'':<div className='alert alert-danger '>{getError("email")}</div>}
+        { getError("email").length===0?'':<div className='alert alert-danger '>{getError("email")}</div>}
         <label  htmlFor="password">password</label>
         <input onChange={getUser} type="password" className='form-control my-3' placeholder='password' id='password' />
-        { getError("password").length==0?'':<div className='alert alert-danger '>{getError("password")}</div>}
+        { getError("password").length===0?'':<div className='alert alert-danger '>{getError("password")}</div>}
         <button className='btn btn-outline-info '>
         {registerflag?<i className='fa-solid fa-spin fa-spinner'></i>:"Register"}
         </button>

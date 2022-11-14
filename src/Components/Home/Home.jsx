@@ -1,24 +1,12 @@
-import React,{ useEffect , useState} from 'react'
-import axios from "axios";
-import { Link } from 'react-router-dom';
-export  function Home() {
-   const [movies, setMovies] = useState([]);
-   const [tv, setTv] = useState([]);
-   async function movieapi(){
-    let {data}= await axios.get("https://api.themoviedb.org/3/trending/movie/week?api_key=8d6476c35be71f67c98027f358882b6b");
-    setMovies(data.results);
- }
- async function tvShow(){
-  let {data}= await axios.get("https://api.themoviedb.org/3/trending/tv/week?api_key=8d6476c35be71f67c98027f358882b6b");
-  // console.log(data.results);
-  setTv(data.results);
-}
-   useEffect(()=>{
-  
-   movieapi();
-   tvShow();
+import React from 'react'
+import avatar from '../img-not.jpg'
 
-  },[]);
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { MovieContext } from './../Store';
+
+export  function Home() {
+  let {movies , tv ,person} =useContext(MovieContext);
   return <>
   
   {
@@ -42,7 +30,7 @@ export  function Home() {
         
       </div>)}
     </div>
-    <div className="row align-items-center">
+    <div className="row align-items-center py-2">
       <div className="col-md-4">
         <div className="title">
           <h3>Trending Tv To watch now</h3>
@@ -54,8 +42,30 @@ export  function Home() {
         
        
           <div className="content position-relative">
-              <img src={`https://image.tmdb.org/t/p/original/${element.poster_path}`} className='w-100' alt="" />
+              <img src={`https://image.tmdb.org/t/p/original/${element.poster_path}`} className='w-100' alt="img" />
               <span className='label bg-info p-2 position-absolute top-0 end-0 rounded-1 '>{element.vote_average}</span>
+              <p>{element.name}</p>
+          </div>
+        
+        
+      </div>)}
+    </div>
+    <div className="row align-items-center py-2">
+      <div className="col-md-4">
+        <div className="title">
+          <h3>Trending person To watch now</h3>
+          <p className='text-muted'>most watchs person by days</p>
+        </div>
+      </div>
+      {person.map((element,idx)=>
+      <div key={idx} className="col-md-2">
+        
+       
+          <div className="content position-relative">
+            {
+              element.profile_path===null? <img className='w-100 heg' src={avatar}/>:<img src={`https://image.tmdb.org/t/p/original/${element.profile_path}`} className='w-100' alt="" />
+            }
+              
               <p>{element.name}</p>
           </div>
         

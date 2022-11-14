@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Joi from 'joi';
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
 
 export  function Login({tokenDecode}) {
@@ -62,6 +62,13 @@ export  function Login({tokenDecode}) {
       }
       
   }
+  useEffect(()=>{
+    if(localStorage.getItem('token')!=null){
+      navigate('/home');
+    }
+     
+   
+     },[]);
 
 
 
@@ -78,10 +85,10 @@ return <>
   
   <label htmlFor="email">email</label>
         <input onChange={getUser} type="email" className='form-control my-3' placeholder='email' id='email' />
-        { getError("email").length==0?'':<div className='alert alert-danger '>{getError("email")}</div>}
+        { getError("email").length===0?'':<div className='alert alert-danger '>{getError("email")}</div>}
         <label  htmlFor="password">password</label>
         <input onChange={getUser} type="password" className='form-control my-3' placeholder='password' id='password' />
-        { getError("password").length==0?'':<div className='alert alert-danger '>{getError("password")}</div>}
+        { getError("password").length===0?'':<div className='alert alert-danger '>{getError("password")}</div>}
       <button className='btn btn-outline-info '>
         {loginflag?<i className='fa-solid fa-spin fa-spinner'></i>:"Login"}
      </button>
